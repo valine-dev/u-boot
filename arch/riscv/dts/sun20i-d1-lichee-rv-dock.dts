@@ -13,6 +13,7 @@
 
 	aliases {
 		ethernet1 = &rtl8723ds;
+		sp1 = &spi1
 	};
 
 	dmic_codec: dmic-codec {
@@ -47,6 +48,18 @@
 		compatible = "mmc-pwrseq-simple";
 		reset-gpios = <&pio 6 12 GPIO_ACTIVE_LOW>; /* PG12 */
 	};
+};
+
+&spi1 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&spi1_pins>, <&spi1_hold_pin>, <&spi1_wp_pin>;
+    status = "okay";
+
+    flashprog_spi: flashprog@0 {
+        compatible = "sourcearcade,flashprog-spi";
+        reg = <0>;
+        spi-max-frequency = <24000000>;
+    };
 };
 
 &dmic {
