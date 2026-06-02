@@ -50,6 +50,18 @@
 	};
 };
 
+&spi1 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&spi1_pins>, <&spi1_hold_pin>, <&spi1_wp_pin>;
+    status = "okay";
+
+    flashprog_spi: flashprog@0 {
+        compatible = "sourcearcade,flashprog-spi";
+        reg = <0>;
+        spi-max-frequency = <24000000>;
+    };
+};
+
 
 &dmic {
 	pinctrl-0 = <&dmic_pb11_d0_pin>, <&dmic_pe17_clk_pin>;
@@ -96,36 +108,4 @@
 
 &usbphy {
 	usb1_vbus-supply = <&reg_vcc>;
-};
-
-&pio {
-    /omit-if-no-ref/
-    spi1_pins: spi1-pins {
-        pins = "PD10", "PD11", "PD12", "PD13";
-        function = "spi1";
-    };
-
-    /omit-if-no-ref/
-    spi1_hold_pin: spi1-hold-pin {
-        pins = "PD14";
-        function = "spi1";
-    };
-
-    /omit-if-no-ref/
-    spi1_wp_pin: spi1-wp-pin {
-        pins = "PD15";
-        function = "spi1";
-    };
-};
-
-&spi1 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&spi1_pins>, <&spi1_hold_pin>, <&spi1_wp_pin>;
-    status = "okay";
-
-    flashprog_spi: flashprog@0 {
-        compatible = "sourcearcade,flashprog-spi";
-        reg = <0>;
-        spi-max-frequency = <24000000>;
-    };
 };
